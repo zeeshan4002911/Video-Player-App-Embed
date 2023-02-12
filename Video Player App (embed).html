@@ -59,7 +59,7 @@
     </style>
     <script>
         // url of the embed "https://www.example.com/embed"
-        const url = "https://www.youtube.com/embed";
+        let url = "https://www.youtube.com/embed";
 
         const load = "11941";
         let prev = "11941";
@@ -70,6 +70,7 @@
 
         function connectURI() {
             url = document.getElementById("url").value;
+            frame.setAttribute("src", `${url}/${load}`);
         }
 
         function nextFun() {
