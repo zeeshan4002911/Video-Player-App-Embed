@@ -4,5 +4,5 @@ This is a universal Video Player using embed
 You Just to press connect after entering your desired website embed link
 url format example "https://www.example.com/embed"
 
-currently the supported unique video Id is only 5-6 digits number
+currently the supported unique video Id is only 2-6 digits number
 the final embed url becomes "https://www.example.com/embed/12345"
