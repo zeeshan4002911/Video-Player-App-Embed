@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embed Player</title>
+</head>
+
+<body>
+    <div id="App">
+        <iframe frameborder="0" allowfullscreen id="frame"></iframe>
+        <div>
+            <button onclick="prevFun()" id="mybtnPrev">Prev</button>
+            <h4 id="uid" style="display: inline-block;"></h4>
+            <button onclick="nextFun()" id="mybtn">Next</button>
+        </div>
+        <div>
+            <input type="text" id="search" placeholder="Unique Id">
+            <button onclick="findFun()">Find</button>
+        </div>
+        <div>
+            <input type="text" id="url" placeholder="https://www.example.com/embed">
+            <button onclick="connectURI()">Connect</button>
+        </div>
+    </div>
+    <style>
+        #App {
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #frame {
+            width: 852px;
+            height: 480px;
+            border-radius: 5px;
+        }
+
+        button, input {
+            padding: 0.5rem 1rem;
+            color: black;
+            margin: 1rem;
+        }
+
+        input {
+            width: 15vw;
+        }
+
+        @media only screen and (max-width: 500px) {
+            #frame {
+                width: 90vw;
+                height: auto;
+            }
+        }
+    </style>
+    <script>
+        // url of the embed "https://www.example.com/embed"
+        const url = "https://www.youtube.com/embed";
+
+        const load = "11941";
+        let prev = "11941";
+        const frame = document.getElementById("frame");
+        const uid = document.getElementById("uid");
+        uid.innerText = load;
+        frame.setAttribute("src", `${url}/${load}`);
+
+        function connectURI() {
+            url = document.getElementById("url").value;
+        }
+
+        function nextFun() {
+
+            // Storing the previous video into prev
+            let temp = frame.getAttribute("src");
+            let temp_arr = temp.split("/")
+            prev = temp_arr[temp_arr.length - 1];
+
+            let newVid = generateRandom();
+            frame.setAttribute("src", `${url}/${newVid}`);
+            uid.innerText = newVid;
+        }
+
+        function prevFun() {
+            frame.setAttribute("src", `${url}/${prev}`);
+            uid.innerText = prev;
+        }
+        function findFun() {
+            const search = document.getElementById("search").value;
+            frame.setAttribute("src", `${url}/${search}`);
+            uid.innerText = search;
+        }
+        function generateRandom() {
+            // min and max value needs to be changed depending upon need
+            let min = 10000;
+            let max = 119999;
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+    </script>
+</body>
+
+</html>
